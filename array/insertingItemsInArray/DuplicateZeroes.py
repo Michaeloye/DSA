@@ -3,36 +3,13 @@ class Solution:
         """
         Do not return anything, modify arr in-place instead.
         """
-        if not (any(elem == 0 for elem in arr)):
-            arr
-            return
+        # queue is first in first out
+        queue = []
 
-        def moveArrayItems(array, start):
-            res = array[start:]
-            for idx, item in enumerate(array[start:]):
-                rev_idx = len(res) - idx - 1
+        # so loop through the arr, append items in arr to queue, if 0 append 0 again, lastly pop(0) from queue to arr[index]
+        for i in range(len(arr)):
+            queue.append(arr[i])
+            if arr[i] == 0:
+                queue.append(0)
 
-                if (rev_idx == len(res) - 1):
-                    res[rev_idx] = 0
-                else:
-                    res[rev_idx + 1] = res[rev_idx]
-                    res[rev_idx] = 0
-
-            res = array[:start] + res
-            return res
-
-        _arr = arr
-        # loop array
-        # if we spot a zero move the next items by one step
-        # add zero to the next postion
-
-        i = 0
-        for idx, item in enumerate(arr):
-            if item == 0:
-                _arr = moveArrayItems(_arr, idx + i)
-                i += 1
-
-        print(_arr)
-
-        del arr[0:]
-        arr += _arr
+            arr[i] = queue.pop(0)
