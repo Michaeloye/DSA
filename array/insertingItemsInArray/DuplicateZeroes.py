@@ -1,15 +1,26 @@
+from typing import List
+
+
 class Solution:
-    def duplicateZeros(self, arr: List[int]) -> None:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
-        Do not return anything, modify arr in-place instead.
+        Do not return anything, modify nums1 in-place instead.
         """
-        # queue is first in first out
-        queue = []
+        i = m - 1
+        j = n - 1
+        k = m + n - 1
 
-        # so loop through the arr, append items in arr to queue, if 0 append 0 again, lastly pop(0) from queue to arr[index]
-        for i in range(len(arr)):
-            queue.append(arr[i])
-            if arr[i] == 0:
-                queue.append(0)
+        while i >= 0 and j >= 0:
+            if nums1[i] > nums2[j]:
+                nums1[k] = nums1[i]
+                nums1[i] = 0
+                i -= 1
+            else:
+                nums1[k] = nums2[j]
+                j -= 1
+            k -= 1
 
-            arr[i] = queue.pop(0)
+        while j >= 0:
+            nums1[k] = nums2[j]
+            k -= 1
+            j -= 1
