@@ -28,3 +28,18 @@ nums = [0, 0]
 val = 0
 end = soln.removeElement(nums, val)
 print(nums[:end])
+
+# MORE EFFICIENT
+
+
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        slow = 0
+
+        for fast in nums:
+            if fast != val:
+
+                nums[slow] = fast
+                slow += 1
+
+        return slow
