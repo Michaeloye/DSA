@@ -9,13 +9,14 @@ class Solution:
         length = len(nums)
 
         while slow < length:
-            if (nums[slow] % 2 != 0):
-                while (nums[fast] % 2 != 0 and fast < length):
+            if (nums[slow] % 2 != 0 and fast < length):
+                while (nums[fast] % 2 != 0):
                     fast += 1
                     if (fast == length):
                         return nums
                 nums[slow], nums[fast] = nums[fast], nums[slow]
             slow += 1
+            fast += 1
         return nums
 
 
