@@ -19,17 +19,15 @@ class MyLinkedList:
     def get(self, index: int) -> int:
         if (index < 0 or index >= self.length):
             return -1
-        if (self.length == 0):
+        if self.head is None:
             return -1
 
         cur = self.head
 
-        for i in range(self.length):
-            if (i == index):
-                print("GET", i, cur.val)
-                return cur.val
-
+        for i in range(index):
             cur = cur.next
+
+        return cur.val
 
     def addAtHead(self, val: int) -> None:
         curHead = self.head
@@ -39,8 +37,6 @@ class MyLinkedList:
             newHead = Node(val)
             newHead.next = curHead
             self.head = newHead
-
-        print("head", self.head)
         self.length += 1
 
     def addAtTail(self, val: int) -> None:
@@ -51,16 +47,11 @@ class MyLinkedList:
             self.length += 1
             return
 
-        for _ in range(self.length):
-            if (cur.next == None):
-                cur.next = newTail
-                self.length += 1
-                print("tail", cur.next)
-                return
-
+        while cur.next is not None:
             cur = cur.next
 
-        # self.length += 1
+        cur.next = newTail
+        self.length += 1
 
     def addAtIndex(self, index: int, val: int) -> None:
         if (index == 0):
@@ -78,14 +69,12 @@ class MyLinkedList:
         newNode = Node(val)
 
         # starting at 1 since we already have prev which is our head
-        for i in range(1, self.length):
-            if (i == index):
-                next = prev.next
-                prev.next = newNode
-                newNode.next = next
-                self.length += 1
-                return
+        for i in range(1, index):
             prev = prev.next
+        next = prev.next
+        prev.next = newNode
+        newNode.next = next
+        self.length += 1
 
     def deleteAtIndex(self, index: int) -> None:
         if (self.length == 0):
@@ -100,19 +89,17 @@ class MyLinkedList:
                 self.length -= 1
                 return
 
-            for i in range(1, self.length):
-                if (i == index):
-                    cur = prev.next
-                    next = cur.next
-
-                    prev.next = next
-                    cur.next = None
-                    self.length -= 1
-
-                    return
+            for i in range(1, index):
                 prev = prev.next
-        return
 
+            cur = prev.next
+            next = cur.next
+
+            prev.next = next
+            cur.next = None
+            self.length -= 1
+
+        return
 
 # Your MyLinkedList object will be instantiated and called as such:
 # obj = MyLinkedList()
