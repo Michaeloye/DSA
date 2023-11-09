@@ -7,6 +7,7 @@ class Node:
         self.next = next
         self.child = child
 """
+# https://leetcode.com/explore/learn/card/linked-list/213/conclusion/1225/discuss/152725/Python-solution-with-explanation
 
 
 class Solution:
