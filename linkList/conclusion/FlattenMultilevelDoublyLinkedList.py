@@ -30,3 +30,26 @@ class Solution:
 
             curr = curr.next
         return head
+
+
+# another solution: recursive solution
+# class Solution:
+#     def flatten(self, head):
+
+#         def flatten(head):
+#             last = head
+#             while head:
+#                 next_node, last = head.next, head
+#                 if head.child:
+#                     last = flatten(head.child)
+#                     head.next = head.child
+#                     head.child.prev = head
+#                     last.next = next_node
+#                     if next_node:
+#                         next_node.prev = last
+#                     head.child = None
+#                 head = next_node
+#             return last
+
+#         flatten(head)
+#         return head
