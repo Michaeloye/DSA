@@ -21,3 +21,25 @@ def matrixGraphRepresentation():
     print(j)
 matrixGraphRepresentation()
 
+
+# 0(2 * M) undirected
+def listGraphRepresentation():
+  # nodes
+  n = int(input("Enter number of nodes: "))
+  # edges
+  m = int(input("Enter number of edges: "))
+
+  print("### edges ###")
+
+  graph =  { i: set() for i in range(n + 1)}
+
+  for i in range(m):
+    u = int(input("Enter node: "))
+    v = int(input(f"node {u} connects to: "))
+
+    graph[u].add(v)
+    graph[v].add(u)
+
+  print(graph)
+
+listGraphRepresentation()
