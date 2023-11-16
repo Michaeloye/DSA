@@ -17,12 +17,14 @@ class Solution:
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        numsMap = {}
+        numsMap = {}  # val: index
         i = 0
 
         while i < len(nums):
-            if target - nums[i] in numsMap:
-                return [numsMap[target - nums[i]], i]
+            diff = target - nums[i]
+            # if diff is not in numsMap add it to the numsMap
+            if diff in numsMap:
+                return [numsMap[diff], i]
             else:
                 numsMap[nums[i]] = i
 
