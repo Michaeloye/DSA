@@ -25,3 +25,15 @@ def printLinearly(i, n):
 
 
 printLinearly(0, 5)
+
+
+# print descrementally from n to 1
+def printDecrementally(i, n):
+    if i > n:
+        return
+
+    print(n - i)
+    printDecrementally(i+1, n)
+
+
+printDecrementally(0, 5)
