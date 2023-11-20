@@ -11,3 +11,17 @@ def printName(i, n):
 
 
 printName(1, 5)
+
+
+# print linearly from 1 to N
+# i -> iteration
+# n -> number to print to
+def printLinearly(i, n):
+    if i > n:
+        return
+
+    print(i)
+    printLinearly(i + 1, n)
+
+
+printLinearly(0, 5)
