@@ -9,8 +9,8 @@ class Solution:
             localName = splitEmail[0]
             domainName = splitEmail[1]
 
-            localName = localName.replace(".", "")
             localName = localName.split("+")[0]
+            localName = localName.replace(".", "")
 
             parsedEmail = f"{localName}@{domainName}"
 
