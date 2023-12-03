@@ -1,5 +1,5 @@
 
-def QuickSort(array, start, end):
+def quickSort(array, start, end):
     if (end <= start):
         return
 
@@ -17,11 +17,11 @@ def QuickSort(array, start, end):
 
     array[i], array[end] = array[end], array[i]
 
-    QuickSort(array, start, i - 1)
-    QuickSort(array, i + 1, end)
+    quickSort(array, start, i - 1)
+    quickSort(array, i + 1, end)
 
 
 arr = [8, 2, 4, 7, 1, 3, 9, 6, 5]
 
-QuickSort(arr, 0, len(arr) - 1)
+quickSort(arr, 0, len(arr) - 1)
 print(arr)
