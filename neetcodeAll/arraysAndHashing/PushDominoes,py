@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/push-dominoes/
 
+from collections import deque
+
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
         length = len(dominoes)
@@ -51,3 +53,31 @@ class Solution:
 
 soln = Solution()
 print(soln.pushDominoes("R.R.L"))
+
+# SOLUTION 2
+
+class Solution:
+    def pushDominoes(self, dominoes: str) -> str:
+        letters = list(dominoes)
+        queue = deque()
+
+        for i, lett in enumerate(dominoes):
+            if lett != '.':
+                queue.append((i, lett))
+
+        while queue:
+            i, lett = queue.popleft()
+
+            if lett == 'L':
+                if i > 0:
+                    if letters[i-1] == '.':
+                        queue.append((i - 1, 'L'))
+                        letters[i-1] = 'L'
+            elif lett == 'R':
+                if i + 1 < len(letters) and letters[i + 1] == '.':
+                    if i + 2 < len(letters) and letters[i + 2] == 'L':
+                        queue.popleft()
+                    else:
+                        letters[i + 1] = 'R'
+        return ''.join(letters)
+
