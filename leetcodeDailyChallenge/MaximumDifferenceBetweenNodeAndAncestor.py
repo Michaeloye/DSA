@@ -27,3 +27,23 @@ class Solution:
 
         ans = dfs(root, ancestors, maxDifference)
         return ans
+
+
+# OPTIMIZED SOLUTION
+
+
+class Solution:
+    def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
+
+        def dfs(node, minVal=float('inf'), maxVal=float('-inf')):
+            if not node:
+                return maxVal - minVal
+
+            minVal = min(node.val, minVal)
+            maxVal = max(node.val, maxVal)
+            l = dfs(node.left, minVal, maxVal)
+            r = dfs(node.right, minVal, maxVal)
+
+            return max(l, r)
+
+        return dfs(root)
