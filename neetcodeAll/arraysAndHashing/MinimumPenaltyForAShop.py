@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/minimum-penalty-for-a-shop/
 
+# NON-OPTIMIZED SOLUTION
 class Solution:
     def bestClosingTime(self, customers: str) -> int:
         # counting the number of Ns from the left
@@ -31,3 +32,20 @@ class Solution:
             penalty[i] = prefixN[i] + postfixY[i]
 
         return penalty.index(min(penalty))
+
+
+# OPTIMIZED SOLUTION
+class Solution:
+    def bestClosingTime(self, customers: str) -> int:
+        # Instead of computing the minimum penalty, we can compute the maximum profit.
+        ans = 0
+        profit = 0
+        maxProfit = 0
+
+        for i, customer in enumerate(customers):
+            profit += 1 if customer == 'Y' else -1
+            if profit > maxProfit:
+                maxProfit = profit
+                ans = i + 1
+
+        return ans
