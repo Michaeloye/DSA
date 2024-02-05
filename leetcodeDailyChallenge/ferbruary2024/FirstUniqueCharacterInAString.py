@@ -19,3 +19,17 @@ class Solution:
                 ans = min(ans, idx)
         
         return -1 if ans == float('inf') else ans
+
+# Add optimal solution
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+
+        for i in range(len(s)):
+            idxFromLeft = s.index(s[i])
+            idxFromRight = s.rindex(s[i])
+
+            if idxFromLeft == idxFromRight:
+                return i
+        
+        return -1
+
