@@ -1,12 +1,18 @@
-arr = [2, 2, 1, 4, 3, 7]
+arr =[2,3,5]
 
 res = []
+cache = set()
 
 
 def combinationSum(idx, target, ds, ans):
+    if tuple(ds) in cache:
+        return
+
     if target == 0:
         # to avoid actually appending a reference to the same list multiple times
         ans.append([*ds])
+        cache.add(tuple(ds))
+        print(cache)
         return
     if target < 0:
         return
@@ -15,12 +21,14 @@ def combinationSum(idx, target, ds, ans):
 
     curr = arr[idx]
     ds.append(curr)
+    combinationSum(idx, target - curr, ds, ans)
+
     combinationSum(idx + 1, target - curr, ds, ans)
 
     ds.pop()
     combinationSum(idx + 1, target, ds, ans)
 
 
-combinationSum(0, 7, [], res)
+combinationSum(0, 8 , [], res)
 
 print(res)
