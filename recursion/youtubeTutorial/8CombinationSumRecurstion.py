@@ -32,3 +32,22 @@ def combinationSum(idx, target, ds, ans):
 combinationSum(0, 8 , [], res)
 
 print(res)
+
+
+# OPTIMAL CODE
+
+candidates = [2,3,5]
+def combinationSum(idx, target, ds, ans):
+    if idx == len(candidates):
+        return
+    if target == 0:
+        ans.append([*ds])
+        return
+
+    if candidates[idx] <= target:
+        ds.append(candidates[idx])
+        combinationSum(idx, target - candidates[idx], ds, ans)
+        ds.pop()
+
+    combinationSum(idx + 1, target, ds, ans)
+
