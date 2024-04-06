@@ -46,3 +46,38 @@ class Solution:
         dfs(0)
         return ans
 
+
+# Add optimal solution
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        board = [['.' for i in range(n)]  for j in range(n)]
+        ans = []
+
+        rowMap = {i: 0 for i in range(n)}
+        downDiagonalMap = {i: 0 for i in range(2 * n)}
+        upDiagonalMap = {i: 0 for i in range(2 * n)}
+
+        def dfs(c):
+            if c >= n:
+                res = []
+                for row in board:
+                    res.append("".join(row))
+                ans.append(res)
+                return
+
+            for row in range(n):
+                if rowMap[row] == 0 and downDiagonalMap[row + c] == 0 and upDiagonalMap[(n - 1) + (c - row)] == 0:
+                    rowMap[row] = 1
+                    downDiagonalMap[row + c] = 1
+                    upDiagonalMap[(n - 1) + (c - row)] = 1
+
+                    board[row][c] = "Q"
+                    dfs(c + 1)
+                    board[row][c] = "."
+
+                    rowMap[row] = 0
+                    downDiagonalMap[row + c] = 0
+                    upDiagonalMap[(n - 1) + (c - row)] = 0
+
+        dfs(0)
+        return ans
