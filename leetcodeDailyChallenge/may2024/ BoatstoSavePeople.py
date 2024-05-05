@@ -17,3 +17,28 @@ class Solution:
                 r -= 1
 
         return boatCount
+
+# if boat does not have a limit of two
+class Solution:
+    def numRescueBoats(self, people: List[int], limit: int) -> int:
+        people.sort()
+
+        boatCount = 0
+        currSum = 0
+
+        for i in range(len(people)):
+            currSum += people[i]
+
+            if currSum == limit:
+                boatCount += 1
+                currSum = 0
+            elif currSum > limit:
+                boatCount += 1
+                currSum = people[i]
+        
+        if currSum > 0 and currSum <= limit:
+            boatCount += 1
+
+        return boatCount
+
+
