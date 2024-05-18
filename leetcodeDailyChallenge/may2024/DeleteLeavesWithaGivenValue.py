@@ -19,6 +19,7 @@ class Solution:
 
         return root
 
+# iterative solution
 class Solution:
     def removeLeafNodes(self, root: Optional[TreeNode], target: int) -> Optional[TreeNode]:
         stack = [root]
