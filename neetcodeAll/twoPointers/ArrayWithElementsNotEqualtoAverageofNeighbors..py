@@ -13,3 +13,21 @@ class Solution:
             ans[i] = nums.pop()
 
         return ans
+
+
+# using two pointer method
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        nums.sort()
+        n = len(nums)
+        ans = []
+        l, r = 0, n - 1
+
+        while n != len(ans):
+            ans.append(nums[l])
+            l += 1
+
+            if l <= r:
+                ans.append(nums[r])
+                r -= 1
+        return ans
