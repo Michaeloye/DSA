@@ -20,3 +20,19 @@ class Solution:
                 res += 1
 
         return res
+
+# add another solution
+class Solution:
+    def numOfSubarrays(self, arr: List[int], k: int, threshold: int) -> int:
+        curSum = sum(arr[:k - 1])
+        res = 0
+        
+        for l in range(len(arr) - k + 1):
+            curSum += arr[l + k - 1]
+
+            if curSum / k >= threshold:
+                res += 1
+            
+            curSum -= arr[l]
+        return res
+
