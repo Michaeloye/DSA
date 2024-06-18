@@ -15,3 +15,17 @@ class Solution:
                 res += 1
 
         return res
+
+# another solution
+class Solution:
+    def minIncrementForUnique(self, nums: List[int]) -> int:
+        count = Counter(nums)
+        res = 0
+
+        for num in range(len(nums) + max(nums)):
+            if count[num] > 1:
+                tmp = count[num]
+                count[num] = 1
+                count[num + 1] += tmp - 1
+                res += tmp - 1
+        return res
