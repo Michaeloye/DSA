@@ -27,3 +27,37 @@ class Solution:
         ans = min(ans, first + last)
 
         return ans
+
+# USING BUCKET
+class Solution:
+    def findMinDifference(self, timePoints: List[str]) -> int:
+
+        def timeInMins(time):
+            h, m = time.split(":")
+            h = int(h) * 60
+            m = int(m)
+
+            return h + m
+        bucket = [False] * (60 * 24)
+        minTime = 60 * 24
+        maxTime = 0
+
+        for time in timePoints:
+            mins = timeInMins(time)
+
+            if bucket[mins]:
+                return 0
+            bucket[mins] = True
+            minTime = min(minTime, mins)
+            maxTime = max(maxTime, mins)
+        
+        prev = minTime
+        res = (60 * 24) - maxTime + minTime
+
+        for time in range(prev + 1, maxTime + 1):
+            if bucket[time]:
+                diff = time - prev
+                res = min(res, diff)
+                prev = time
+
+        return res
