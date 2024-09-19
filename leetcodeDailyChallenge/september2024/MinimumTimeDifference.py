@@ -7,9 +7,6 @@ class Solution:
             h, m = time.split(":")
             h = int(h) * 60
             m = int(m)
-            
-            if h == 0 and m == 0:
-                return 24 * 60
 
             return h + m
         
