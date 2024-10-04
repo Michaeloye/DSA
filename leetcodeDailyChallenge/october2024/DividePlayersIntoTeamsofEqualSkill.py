@@ -21,3 +21,32 @@ class Solution:
             r -= 1
         
         return ans
+
+
+# O(n) solution
+class Solution:
+    def dividePlayers(self, skill: List[int]) -> int:
+        total = sum(skill)
+
+        if (2 * total) % len(skill):
+            return -1
+
+        target = (2 * total) // len(skill)
+        countMap = {}
+        ans = 0
+        for num in skill:
+            countMap[num] = 1 + countMap.get(num, 0)
+        
+        for num in skill:
+            if not countMap[num]:
+                continue
+
+            diff = target - num
+            if diff not in countMap or not countMap[diff]:
+                return -1
+
+            countMap[num] -= 1
+            ans += num * diff
+            countMap[diff] -= 1
+        
+        return ans
