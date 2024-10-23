@@ -29,7 +29,7 @@ class Solution:
         def dfs(node, depth):
             if not node:
                 return
-            # check children of current nod
+            # check children of current node
             if node.left or node.right:
                 left = node.left.val if node.left else 0
                 right = node.right.val if node.right else 0
