@@ -11,7 +11,6 @@ class Solution:
         
         q = deque([root])
         levelSums = []
-        depth = 0
 
         while q:
             levelSum = 0
@@ -23,7 +22,6 @@ class Solution:
                     q.append(cur.left)
                 if cur.right:
                     q.append(cur.right)
-            depth += 1
             levelSums.append(levelSum)
         
         def dfs(node, depth):
