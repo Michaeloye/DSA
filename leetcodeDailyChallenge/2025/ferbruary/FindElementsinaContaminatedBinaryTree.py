@@ -1,5 +1,4 @@
 # https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -9,11 +8,9 @@
 class FindElements:
 
     def __init__(self, root: Optional[TreeNode]):
-        print(root)
         self.root = root
         self.root.val = 0
         self.resolveTree(self.root)
-        print(self.root)
     
     def resolveTree(self, node):
         if not node:
