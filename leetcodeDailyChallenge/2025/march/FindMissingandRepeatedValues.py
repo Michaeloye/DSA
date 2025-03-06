@@ -1,0 +1,21 @@
+# https://leetcode.com/problems/find-missing-and-repeated-values/
+
+class Solution:
+    def findMissingAndRepeatedValues(self, grid: List[List[int]]) -> List[int]:
+        ROWS = len(grid)
+        COLS = len(grid[0])
+
+        n = len(grid)
+        nums = set([i for i in range(1, n * n + 1)])
+        ans = [0, 0]
+
+        for r in range(ROWS):
+            for c in range(COLS):
+                num = grid[r][c]
+                if num in nums:
+                    nums.remove(num)
+                else:
+                    ans[0] = num
+        nums = list(nums)
+        ans[1] = nums[0]
+        return ans
