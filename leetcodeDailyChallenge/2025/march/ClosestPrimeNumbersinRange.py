@@ -65,3 +65,36 @@ class Solution:
                 prevPrime = num
 
         return ans
+
+# O(Nloglogn) time solution
+class Solution:
+    def closestPrimes(self, left: int, right: int) -> List[int]:
+        def generatePrimes():
+            arr = [False, False] + [True] * (right - 1)
+
+            for i in range(2, int(right ** 0.5) + 1):
+                j = 2
+                while i * j <= right:
+                    arr[i * j] = False
+                    j += 1
+            
+            primes = []
+            for i in range(left, right + 1):
+                if arr[i]:
+                    primes.append(i)
+            return primes
+
+        primeNums = generatePrimes()
+        print(primeNums)
+        ans = [-1, -1]
+        minDiff = right - left + 1
+
+        for i in range(1, len(primeNums)):
+            num1 = primeNums[i - 1]
+            num2 = primeNums[i]
+            diff = num2 - num1
+            if diff < minDiff:
+                ans = [num1, num2]
+                minDiff = diff
+            
+        return ans
