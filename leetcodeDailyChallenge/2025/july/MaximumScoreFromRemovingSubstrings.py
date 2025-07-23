@@ -29,3 +29,27 @@ class Solution:
                 stack2.append(c)
 
         return ans
+
+# OPTIMIZED CODE
+class Solution:
+    def maximumGain(self, s: str, x: int, y: int) -> int:
+        def remove_pairs(pair, delta):
+            stack = []
+            ans = 0
+            nonlocal s
+
+            for c in s:
+                if stack and stack[-1] + c == pair:
+                    ans += delta
+                    stack.pop()
+                else:
+                    stack.append(c)
+            s = "".join(stack)
+            return ans
+        
+        ans = 0
+        pair = "ab" if x > y else "ba"
+        ans += remove_pairs(pair, max(x, y))
+        ans += remove_pairs(pair[::-1], min(x, y))
+        
+        return ans
