@@ -3,24 +3,27 @@
 class Solution:
     def bestClosingTime(self, customers: str) -> int:
         n = len(customers)
-        prefix_n = [0] * (n + 1) # count Ns
-        postfix_y = [0] * (n + 1) # count Ys
-        min_sum = n + 1
-        min_sum_idx = 0
+        prefix_n = [0] * (n + 1)
+        postfix_y = [0] * (n + 1)
 
-        for l in range(1, n + 1):
-            di = 1 if customers[l - 1] == 'N' else 0
-            prefix_n[l] = prefix_n[l - 1] + di
+        min_penalty = n + 1
+        min_penalty_idx = 0
 
-        for r in range(n - 1, -1, -1):
-            di = 1 if customers[r] == 'Y' else 0
-            postfix_y[r] = postfix_y[r + 1] + di
+        for i in range(1, n + 1):
+            prefix_n[i] = prefix_n[i - 1]
+            if customers[i - 1] == "N":
+                prefix_n[i] += 1
+        
+        for i in range(n - 1, -1, -1):
+            postfix_y[i] = postfix_y[i + 1]
+            if customers[i] == "Y":
+                postfix_y[i] += 1
         
         for i in range(n + 1):
-            cur_sum = prefix_n[i] + postfix_y[i]
+            cur_penalty = prefix_n[i] + postfix_y[i]
 
-            if cur_sum < min_sum:
-                min_sum = cur_sum
-                min_sum_idx = i
-
-        return min_sum_idx
+            if cur_penalty < min_penalty:
+                min_penalty = cur_penalty
+                min_penalty_idx = i
+        
+        return min_penalty_idx
